@@ -3,6 +3,7 @@ import Bill from './Bill';
 import Friend from './Friend';
 import AddFriend from './AddFriend';
 import { useState } from 'react';
+import Button from './Button';
 
 const data = [
   {
@@ -28,6 +29,7 @@ const data = [
 function App() {
   const [friends, setFriends] = useState(data);
   const [selectFriend, setSelectFriend] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const addFriendHandler = (friend) => {
     setFriends((prevFriends) => [...prevFriends, friend]);
@@ -48,7 +50,10 @@ function App() {
           selectFriend={selectFriend}
         />
 
-        <AddFriend onAddFriend={addFriendHandler} />
+        {open && <AddFriend onAddFriend={addFriendHandler} onOpen={setOpen} />}
+        <Button onClick={() => setOpen((open) => !open)}>
+          {!open ? 'Add Friend' : 'close'}
+        </Button>
       </div>
       {selectFriend && <Bill selectFriend={selectFriend} />}
     </div>

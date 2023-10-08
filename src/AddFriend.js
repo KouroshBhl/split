@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from './Button';
 
-const AddFriend = ({ onAddFriend }) => {
+const AddFriend = ({ onAddFriend, onOpen }) => {
   const [friendName, setFriendName] = useState('');
   const [image, setImage] = useState('https://i.pravatar.cc/48');
 
@@ -19,6 +19,10 @@ const AddFriend = ({ onAddFriend }) => {
     };
 
     onAddFriend(newFriend);
+
+    setFriendName('');
+    setImage('https://i.pravatar.cc/48');
+    onOpen(false);
   };
 
   return (
