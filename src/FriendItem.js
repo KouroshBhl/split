@@ -1,8 +1,13 @@
 import React from 'react';
 import Button from './Button';
 
-const FriendItem = ({ friend, selectFriend, onFriendSelected }) => {
+const FriendItem = ({ friend, selectFriend, onFriendSelected, onOpen }) => {
   const currentFriend = friend.id === selectFriend?.id;
+
+  const handleClick = () => {
+    onFriendSelected(friend);
+    onOpen(false);
+  };
 
   return (
     <li className={currentFriend ? 'selected' : ''}>
@@ -18,7 +23,7 @@ const FriendItem = ({ friend, selectFriend, onFriendSelected }) => {
 
       {friend.payment === 0 && <p>You and {friend.name} are even</p>}
 
-      <Button onClick={() => onFriendSelected(friend)} friend={friend}>
+      <Button onClick={handleClick} friend={friend}>
         {currentFriend ? 'Close' : 'Select'}
       </Button>
     </li>

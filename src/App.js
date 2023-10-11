@@ -10,7 +10,7 @@ const data = [
     id: Math.floor(Math.random() * 1000),
     name: 'Clark',
     picture: 'https://i.pravatar.cc/300?img=1 ',
-    payment: 8,
+    payment: -7,
   },
   {
     id: Math.floor(Math.random() * 1000),
@@ -37,7 +37,17 @@ function App() {
 
   const handleFriendSelected = (friend) => {
     setSelectFriend((cur) => (cur?.id === friend.id ? null : friend));
-    console.log(selectFriend);
+  };
+
+  const handleSplitBill = (value) => {
+    console.log(value);
+    setFriends((friends) =>
+      friends.map((friend) => {
+        return friend.id === selectFriend.id
+          ? { ...friend, payment: friend.payment + value }
+          : friend;
+      })
+    );
   };
 
   return (
@@ -48,6 +58,7 @@ function App() {
           friends={friends}
           onFriendSelected={handleFriendSelected}
           selectFriend={selectFriend}
+          onOpen={setOpen}
         />
 
         {open && <AddFriend onAddFriend={addFriendHandler} onOpen={setOpen} />}
@@ -55,7 +66,13 @@ function App() {
           {!open ? 'Add Friend' : 'close'}
         </Button>
       </div>
-      {selectFriend && <Bill selectFriend={selectFriend} />}
+      {selectFriend && (
+        <Bill
+          selectFriend={selectFriend}
+          onSplitBill={handleSplitBill}
+          onSelectFriend={setSelectFriend}
+        />
+      )}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import FriendItem from './FriendItem';
 
-const Friend = ({ selectFriend, friends, onFriendSelected }) => {
+const Friend = ({ selectFriend, friends, onFriendSelected, onOpen }) => {
   return (
     <div className='sidebar'>
       <ul>
@@ -12,6 +12,7 @@ const Friend = ({ selectFriend, friends, onFriendSelected }) => {
               key={friend.id}
               selectFriend={selectFriend}
               onFriendSelected={onFriendSelected}
+              onOpen={onOpen}
             />
           );
         })}
